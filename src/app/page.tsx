@@ -15,9 +15,11 @@ export default function Home() {
 
       <form id="thumbnail-form" onSubmit={async (e) => {
         e.preventDefault();
-        const form = new FormData(e.currentTarget);
-        const title = form.get("title") as string;
+        const form = e.target as HTMLFormElement;
+        const formData = new FormData(form);
+        const title = formData.get("title") as string;
         await createThumbnail({ title });
+        form.reset();
       }}>
         <label htmlFor="title">Title</label>
         <input id="title" name="title" type="text" className="text-black" />
